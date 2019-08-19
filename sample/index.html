@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+
+    <div id='map' style='width:500px;height:500px;'></div> <!-- Map from JavaScript, GoogleApi -->
+	
+	
+    <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-9XzfWIRagerL60bVUzOpPlpZgmL-4n0&callback=initMap' async defer></script>
+    
+    
+    <script type="text/javascript">
+
+        const users = [
+            {
+                id: 2,
+                name: 'Vitor',        
+                lat  : -23.9772151,
+                lng  : -46.3082780,
+            }, 
+            {
+                id: 3,
+                name: 'Murillo',        
+                lat  : -23.9581367,
+                lng  : -46.3925527,
+            },
+            {
+                id: 4,
+                name: 'DEXTERpy',        
+                lat  : -23.9614568,
+                lng  : -46.3247244,
+            },
+            {
+                id: 5,
+                name: 'Celso',        
+                lat  : -23.9739162,
+                lng  : -46.3122721,
+            },
+            {
+                id: 6,
+                name: 'Darezzo',
+                lat  :-23.9366827,
+                lng  :-46.3882702,
+            },
+        ];
+
+            
+        function haversineDistance(user1, user2, isMiles) {
+            function toRad(x) {
+            return x * Math.PI / 180;
+            }
+        
+            var lon1 = user1.lat;
+            var lat1 = user1.lng;
+        
+            var lon2 = user2.lat;
+            var lat2 = user2.lng;
+        
+            var R = 6371; // km
+        
+            var x1 = lat2 - lat1;
+            var dLat = toRad(x1);
+            var x2 = lon2 - lon1;
+            var dLon = toRad(x2)
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c;
+        
+            if(isMiles) d /= 1.60934;
+        
+            return d;
+        }
+
+
+        /*
+        ```js
+        0 ~ 1 KM  == VERDE
+        2 ~ 3 KM  == AMARELO
+        >3 KM  == VERMELHO
+        ```
+        */
+
+
+        function getColorByKM (distance) {            
+            if(distance <= 1) {
+                return 'green.png';
+            }
+            if(distance <= 3) {
+                return 'yellow.png';
+            }
+            return 'red.png';
+        }
+
+        userTest = {
+            id: 1,
+            name: 'userTest',
+            // Google Maps
+            lat  : -23.9789580,
+            lng  : -46.3121512,
+        };
+
+        function initMap() {
+
+
+            const latlng = new google.maps.LatLng(userTest.lat, userTest.lng);
+            
+            var map = new google.maps.Map(document.getElementById('map'), {
+				 center: latlng
+				,zoom: 12
+				,mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            
+            new google.maps.Marker({
+                position: latlng
+                ,map: map
+                ,title: userTest.name
+                ,draggable: false
+                ,icon: 'flag/user-test.png'
+            });
+            
+
+            let i = 1;
+            users.map(user => {
+
+                //  0,621371 -> 1 KM em milhas/miles
+                const distanceInMiles = haversineDistance(userTest, user, 0,621371);
+                
+
+                console.log({
+                    'name': user.name,
+                    'distanceInMiles': distanceInMiles,
+                });
+
+
+                new google.maps.Marker({
+					 position: new google.maps.LatLng(user.lat, user.lng)
+					,map: map
+					,title: user.name
+					,draggable: false
+					,icon: `flag/${getColorByKM(distanceInMiles)}`
+                });
+
+                i++;
+            });
+			
+			
+		}
+	</script>
+
+
+	
+	
+	
+
+
+
+
+
+</body>
+</html>

@@ -5,6 +5,12 @@ API in JS get nearbly users
 ![Scheme](docs/mapa_proximos.png)
 
 ```js
+0 ~ 1 KM  == VERDE
+2 ~ 3 KM  == AMARELO
+>3 KM  == VERMELHO
+```
+
+```js
 let users = [
     {
         id: 1,
@@ -16,7 +22,7 @@ let users = [
     {
         id: 2,
         name: 'Vitor',        
-        lat  : -23.9772151,distance
+        lat  : -23.9772151,
         lng  : -46.3082780,
     }, 
     {
@@ -45,6 +51,12 @@ let users = [
     },
 ];
 ```  
+
+
+
+
+
+
 
 Fórmula matemática de [Haversine](https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Haversine) (esfera da terra)
 

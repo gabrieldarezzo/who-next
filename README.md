@@ -1,5 +1,6 @@
 # who-next
 API em JS para informar quem está proximo de você em REAL-TIME
+API in JS get nearbly users
 
 ![Scheme](docs/mapa_proximos.png)
 
@@ -43,11 +44,11 @@ let users = [
         lng  :-46.3882702,
     },
 ];
-```
+```  
 
-Forumula Matematica de Haversine (esfera da terra)
+Fórmula matemática de [Haversine](https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Haversine) (esfera da terra)
 
-https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Haversine
+
 
 ```sql
 create database imasters;

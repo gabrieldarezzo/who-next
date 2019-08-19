@@ -1,0 +1,31 @@
+{
+  "name": "who-next",
+  "version": "1.0.0",
+  "description": "API in JS get nearbly users",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "mocha"    
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrieldarezzo/who-next.git"
+  },
+  "keywords": [
+    "Api",
+    "GoogleMaps",
+    "Haversine"
+  ],
+  "author": "Gabriel Darezzo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrieldarezzo/who-next/issues"
+  },
+  "homepage": "https://github.com/gabrieldarezzo/who-next#readme",
+  "dependencies": {
+    "mocha": "^6.2.0"
+  }
+}
